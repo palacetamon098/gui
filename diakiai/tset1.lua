@@ -2,6 +2,8 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
+wait(3)
+
 local Window = Fluent:CreateWindow({
     Title = "Mbm Hub",
     SubTitle = "https://dsc.gg/m1m",
@@ -11,10 +13,7 @@ local Window = Fluent:CreateWindow({
     Theme = "Rose",
     MinimizeKey = Enum.KeyCode.End
 })
-
-wait(3)
-
-local Tabs = {
+local Tabs = ({
     Main = Window:AddTab({ Title = "Main", Icon = "7040391851" }),
     Stats = Window:AddTab({ Title = "Stats", Icon = "11447069304" }),
     Player = Window:AddTab({ Title = "Players", Icon = "15759111217" }),
@@ -26,7 +25,7 @@ local Tabs = {
 	Misc = Window:AddTab({ Title = "Misc", Icon = "11447063791" }),
     Hop = Window:AddTab({ Title = "server", Icon = "15760740893" }),
     Setting = Window:AddTab({ Title = "Setting", Icon = "9606644121" }),
-}
+})
 
 local Options = Fluent.Options
 do
@@ -58,16 +57,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 	game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
-First_Sea = false
-Second_Sea = false
-Third_Sea = false
-if game.PlaceId == 2753915549 then
-First_Sea = true
-elseif game.PlaceId == 4442272183 then
-Second_Sea = true
-elseif game.PlaceId == 7449423635 then
-Third_Sea = true
-end
+wait(2)
 
 local AutoJoinTeam = "Marines" -- "Marines" or "Pirates"
 
@@ -114,35 +104,11 @@ repeat wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
 repeat wait() until game:GetService("Players")
 repeat wait() until game:GetService("Players").LocalPlayer.Character:FindFirstChild("Energy")
 
-wait(0.5)
+wait(1)
 
 if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pirates")
-
-wait(0.1)
-
-if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
-
-if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
-    repeat wait()
-        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
-            if _G.Team == "Pirate" then
-                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
-                    v.Function()
-                end
-            elseif _G.Team == "Marine" then
-                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
-                    v.Function()
-                end
-            else
-                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
-                    v.Function()
-                end
-            end
-        end
-    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
-end
 
 function CheckLevel()
 local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
@@ -5374,9 +5340,7 @@ Tabs.Teleport:AddButton({
         end
     })
 
-
---------------------------------------------------------------------------------------------------------------------------------------------
---Fruit
+-- get food
 
 local Remote_GetFruits = game.ReplicatedStorage:FindFirstChild("Remotes").CommF_:InvokeServer("GetFruits");
 Table_DevilFruitSniper = {}
@@ -7121,7 +7085,7 @@ spawn(function()
     --15582682098--mbm  x  Hub
                           print("made by minh hub")
                           print("mbm x hub")
-                          print("join my discord server : https://dsc.gg/m1m")
+                          print("join my discord server : https://dsc.gg/m1m-link")
                           print("bio : https://bio.site/m1m")
                           print("ty for using - have fun")
                           print("sk")
