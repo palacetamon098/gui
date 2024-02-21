@@ -4950,17 +4950,7 @@ Options.ToggleQuanSat:SetValue(false)
 
 local Teleport = Tabs.Player:AddSection("Combat")
 
-local ToggleAimBotSkill = Tabs.Player:AddToggle("ToggleAimBotSkill", {Title = "Aimbot Skill ( Bug Wait Fix )", Default = false })
-ToggleAimBotSkill:OnChanged(function(Value)
-    Skillaimbot = Value
-end)
-Options.ToggleAimBotSkill:SetValue(false)
 
-local ToggleAimbotGun = Tabs.Player:AddToggle("ToggleAimbotGun", {Title = "Aimbot Gun ( Bug Wait Fix )", Default = false })
-ToggleAimbotGun:OnChanged(function(Value)
-    Aimbot = Value
-end)
-Options.ToggleAimbotGun:SetValue(false)
 
 
 
@@ -5002,113 +4992,10 @@ spawn(function()
     end
 end)
 
---aimbot skill
 
-task.spawn(function()
-    while wait() do
-        if Skillaimbot then
-            if game.Players:FindFirstChild(SelectPlayer) and game.Players:FindFirstChild(SelectPlayer).Character:FindFirstChild("HumanoidRootPart") and game.Players:FindFirstChild(SelectPlayer).Character:FindFirstChild("Humanoid") and game.Players:FindFirstChild(SelectPlayer).Character.Humanoid.Health > 0 then
-                AimBotSkillPosition = game.Players:FindFirstChild(SelectPlayer).Character:FindFirstChild(
-                    "HumanoidRootPart").Position
-            end
-        end
-    end
-end)
------------
---aimbot gun
-local lp = game:GetService('Players').LocalPlayer
-local mouse = lp:GetMouse()
-mouse.Button1Down:Connect(function()
-    if Aimbot and game.Players.LocalPlayer.Character:FindFirstChild(SelectToolWeaponGun) and game:GetService("Players"):FindFirstChild(SelectPlayer) then
-        tool = game:GetService("Players").LocalPlayer.Character[SelectToolWeaponGun]
-        v17 = workspace:FindPartOnRayWithIgnoreList(
-            Ray.new(tool.Handle.CFrame.p,
-                (game:GetService("Players"):FindFirstChild(SelectPlayer).Character.HumanoidRootPart.Position - tool.Handle.CFrame.p)
-                .unit * 100), { game.Players.LocalPlayer.Character, workspace._WorldOrigin });
-        game:GetService("Players").LocalPlayer.Character[SelectToolWeaponGun].RemoteFunctionShoot:InvokeServer(
-            game:GetService("Players"):FindFirstChild(SelectPlayer).Character.HumanoidRootPart.Position,
-            (require(game.ReplicatedStorage.Util).Other.hrpFromPart(v17)));
-    end
-end)
 
 --------------------------------------------------------------------------------------------------------------------------------------------
-
-local Mastery = Tabs.Player:AddSection("Misc Pvp")
-
-local ToggleSoruNOCD = Tabs.Player:AddToggle("ToggleSoruNOCD", {Title = "Soru No Cooldown", Default = false })
-ToggleSoruNOCD:OnChanged(function(Value)
-    _G.SoruNoCd = Value
-	NoCooldown()
-end)
-Options.ToggleSoruNOCD:SetValue(false)
-function NoCooldown()
-	for i,v in next, getgc() do
-		if typeof(v) == "function" then
-			if getfenv(v).script == game.Players.LocalPlayer.Character:WaitForChild("Dodge") and _G.DashNoCd then
-				for i2,v2 in next, getupvalues(v) do
-					if tostring(v2) == "0.4" then
-						repeat wait(.1)
-							setupvalue(v,i2,0)
-						until not _G.DashNoCd
-					end
-				end
-			end
-			if getfenv(v).script == game.Players.LocalPlayer.Character:WaitForChild("Geppo") and _G.GeppoNoCd then
-				for i2,v2 in next, getupvalues(v) do
-					if tostring(v2) == "0" then
-						repeat wait(.1)
-							setupvalue(v,i2,0)
-						until not _G.GeppoNoCd
-					end
-				end
-			end
-			if getfenv(v).script == game.Players.LocalPlayer.Character:WaitForChild("Soru") and _G.SoruNoCd then
-				for i2,v2 in pairs(debug.getupvalues(v)) do
-					if type(v2) == 'table' then
-						if v2.LastUse then
-							repeat wait()
-								setupvalue(v, i2, {LastAfter = 0,LastUse = 0})
-							until not _G.SoruNoCd
-						end
-					end
-				end
-			end
-		end
-	end
-end
---------------------------------------------------------------------------------------------------------------------------------------------
-local ToggleGeppoNoCD = Tabs.Player:AddToggle("ToggleGeppoNoCD", {Title = "Geppo No Cooldown", Default = false })
-ToggleGeppoNoCD:OnChanged(function(Value)
-    _G.GeppoNoCd = Value
-		NoCooldown()
-end)
-Options.ToggleGeppoNoCD:SetValue(false)
---------------------------------------------------------------------------------------------------------------------------------------------
-local ToggleDashNoCD = Tabs.Player:AddToggle("ToggleDashNoCD", {Title = "Dash No Cooldown", Default = false })
-ToggleDashNoCD:OnChanged(function(Value)
-    _G.DashNoCd = Value
-    DodgeNoCoolDown()
-end)
-Options.ToggleDashNoCD:SetValue(false)
-function DodgeNoCoolDown()
-    if _G.DashNoCd then
-        for i, v in next, getgc() do
-            if game.Players.LocalPlayer.Character.Dodge then
-                if typeof(v) == "function" and getfenv(v).script == game.Players.LocalPlayer.Character.Dodge then
-                    for i2, v2 in next, getupvalues(v) do
-                        if tostring(v2) == "0.4" then
-                            repeat
-                                wait(.1)
-                                setupvalue(v, i2, 0)
-                            until not _G.DashNoCd
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
-
+--[[
 --------------------------------------------------------------------------------------------------------------------------------------------
 local ToggleSpeedHack = Tabs.Player:AddToggle("ToggleSpeedHack", {Title = "Speed Hack", Default = true })
 ToggleSpeedHack:OnChanged(function(Value)
@@ -5156,7 +5043,7 @@ function InfAbility()
 end
 
 --------------------------------------------------------------------------------------------------------------------------------------------
-local ToggleWalkOnWater = Tabs.Player:AddToggle("ToggleWalkOnWater", {Title = "Wakl On Water", Default = true })
+local ToggleWalkOnWater = Tabs.Player:AddToggle("ToggleWalkOnWater", {Title = "Walk On Water", Default = true })
 ToggleWalkOnWater:OnChanged(function(Value)
     _G.WalkWater = Value
 end)
@@ -5173,7 +5060,7 @@ spawn(function()
         end)
     end
 end)
-
+]]
 -----------------------------------------------------------------------------------------------------------------------------------------------
 --Teleport
 local Teleport = Tabs.Teleport:AddSection("Teleport World")
