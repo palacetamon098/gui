@@ -5467,7 +5467,7 @@ spawn(function()
     end
 end)
 
-Tabs.Info:AddButton({
+Tabs.Raid:AddButton({
     Title = "buy chip select",
     Description = "",
     Callback = function()
