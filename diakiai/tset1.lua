@@ -137,8 +137,8 @@ nowe = false
 
 game:GetService("StarterGui"):SetCore("SendNotification", { 
 	Title = "bio.site/m1m";
-	Text = "By me_ozone and Quandale The Dinglish XII#3550";
-	Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
+	Text = "By minh and dakii";
+	Icon = "rbxthumb://type=Asset&id=16149561122&w=150&h=150"})
 Duration = 5;
 
 Frame.Active = true -- main = gui
