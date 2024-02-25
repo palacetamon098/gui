@@ -4615,10 +4615,14 @@ Options.ToggleF:SetValue(false)
 
 local Pos = Tabs.Setting:AddSection("Distance Farm")
 
-while true do
+local function randomPosition()
     local randomX = math.random(10, 25)
     local randomY = math.random(15, 25)
     local randomZ = math.random(10, 25)
+    return randomX, randomY, randomZ
+end
+    function repeatFunction()
+        local randomX, randomY, randomZ = randomPosition()
 
 local SliderPosX = Tabs.Setting:AddSlider("SliderPosX", {
     Title = "Pos X",
@@ -4667,8 +4671,11 @@ SliderPosZ:OnChanged(function(Value)
      posZ = Value
 end)
 SliderPosZ:SetValue(randomZ)
-    
+
+  timer.schedule(3, repeatFunction) 
 end
+
+repeatFunction()
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
