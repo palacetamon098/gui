@@ -2570,7 +2570,7 @@ end
 --------------------------------------------------------------------------------------------------------------------------------------------
 --Create Tabs
 local Farming = Tabs.Main:AddSection("Farming")
-local listfastattack = {'Normal Attack','Fast Attack','Super Fast Attack'}
+local listfastattack = {'Normal Attack','0.15','0 (risk)','0.5','0.25','0.05'}
 
     local DropdownDelayAttack = Tabs.Main:AddDropdown("DropdownDelayAttack", {
         Title = "Select Fast Attack",
@@ -2578,15 +2578,19 @@ local listfastattack = {'Normal Attack','Fast Attack','Super Fast Attack'}
         Multi = false,
         Default = 1,
     })
-    DropdownDelayAttack:SetValue("Fast Attack")
+    DropdownDelayAttack:SetValue("0.15")
     DropdownDelayAttack:OnChanged(function(Value)
     _G.FastAttackFaiFao_Mode = Value
-	if _G.FastAttackFaiFao_Mode == "Fast Attack" then
-		_G.Fast_Delay = 0.17
-	elseif _G.FastAttackFaiFao_Mode == "Normal Attack" then
-		_G.Fast_Delay = 0.25
-	elseif _G.FastAttackFaiFao_Mode == "Super Fast Attack" then
-		_G.Fast_Delay = 0.05
+	if _G.FastAttackFaiFao_Mode == "0.15" then
+		_G.Fast_Delay = 0.15
+    elseif _G.FastAttackFaiFao_Mode == "0.5" then
+		_G.Fast_Delay = 0.5
+	elseif _G.FastAttackFaiFao_Mode == "0.25" then
+        _G.Fast_Delay = 0.25
+    elseif _G.FastAttackFaiFao_Mode == "0 (risk)" then
+		_G.Fast_Delay = 0
+    elseif _G.FastAttackFaiFao_Mode == "0.05" then
+        _G.Fast_Delay = 0.05
 	end
 end)
 
@@ -5443,7 +5447,7 @@ DropdownRaid:OnChanged(function(Value)
     SelectChip = Value
 end)
 
-local ToggleBuy = Tabs.Raid:AddToggle("ToggleBuy", {Title = "Buy Chip", Default = false })
+local ToggleBuy = Tabs.Raid:AddToggle("ToggleBuy", {Title = "Auto Buy Chip", Default = false })
 ToggleBuy:OnChanged(function(Value)
     _G.Auto_Buy_Chips_Dungeon = Value
 end)
@@ -5464,7 +5468,7 @@ spawn(function()
 end)
 
 
-    local ToggleStart = Tabs.Raid:AddToggle("ToggleStart", {Title = "Start Raid", Default = false })
+    local ToggleStart = Tabs.Raid:AddToggle("ToggleStart", {Title = "Auto Start Raid", Default = false })
     ToggleStart:OnChanged(function(Value)
         _G.Auto_StartRaid = Value
 end)
@@ -5474,12 +5478,12 @@ spawn(function()
     while wait(.1) do
         pcall(function()
             if _G.Auto_StartRaid then
-                if game:GetService("Players")["LocalPlayer"].PlayerGui..Timer.Visible == false then
+                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
                     if not game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip") then
                         if Second_Sea then
-                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button..ClickDetector)
+                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
                         elseif Third_Sea then
-                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button..ClickDetector)
+                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
                         end
                     end
                 end
@@ -5513,7 +5517,7 @@ spawn(function()
 end)
 
 
-local ToggleNextIsland = Tabs.Raid:AddToggle("ToggleNextIsland", {Title = "Next Island", Default = false })
+local ToggleNextIsland = Tabs.Raid:AddToggle("ToggleNextIsland", {Title = "Auto Next Island", Default = false })
 ToggleNextIsland:OnChanged(function(Value)
     AutoNextIsland = Value
 end)
